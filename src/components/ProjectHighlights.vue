@@ -98,20 +98,26 @@ const projects = [
 
 .project-card {
   background: var(--color-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-radius: var(--border-radius);
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: var(--glass-border);
   transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.5s ease;
   display: flex;
   flex-direction: column;
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px var(--shadow-color);
-  border-color: var(--color-primary);
+  transform: translateY(-10px);
+  box-shadow:
+    0 20px 40px var(--shadow-color),
+    0 0 20px rgba(138, 43, 226, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .project-image-wrapper {
@@ -148,7 +154,7 @@ const projects = [
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(18, 18, 18, 0.2), var(--color-surface));
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.2), var(--color-background));
   z-index: 1;
   display: flex;
   align-items: flex-end;
@@ -206,14 +212,19 @@ const projects = [
 }
 
 .tech-tag {
-  background: rgba(0, 240, 255, 0.1);
-  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--glass-blur);
+  color: var(--color-text-main);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.5px;
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  border: var(--glass-border);
+}
+
+.project-card:hover .tech-tag {
+  border-color: var(--color-primary);
 }
 
 .project-link {

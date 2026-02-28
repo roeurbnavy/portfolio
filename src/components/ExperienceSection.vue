@@ -112,7 +112,7 @@ const experiences = [
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
+  border: var(--glass-border);
   border-radius: var(--border-radius);
   padding: 2rem;
   transition: all var(--transition-speed) ease;

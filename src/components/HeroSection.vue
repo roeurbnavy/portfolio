@@ -11,59 +11,12 @@ const profile = {
 
 <template>
   <section id="hero" class="hero-section">
-    <!-- Awesome Abstract Vector Background -->
-    <div class="hero-bg-vectors">
-      <svg class="tech-grid-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-        <defs>
-          <radialGradient id="glowG" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" style="stop-color: var(--color-secondary); stop-opacity: 0.15" />
-            <stop offset="100%" style="stop-color: var(--color-background); stop-opacity: 0" />
-          </radialGradient>
-          <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" style="stop-color: var(--color-primary); stop-opacity: 0.15" />
-            <stop offset="100%" style="stop-color: var(--color-background); stop-opacity: 0" />
-          </radialGradient>
-          <pattern id="tech-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path
-              d="M 40 0 L 0 0 0 40"
-              fill="none"
-              stroke="rgba(255,255,255,0.02)"
-              stroke-width="1"
-            />
-            <circle cx="40" cy="40" r="1" fill="rgba(0, 240, 255, 0.3)" />
-          </pattern>
-        </defs>
-
-        <!-- Background Grid -->
-        <rect width="100%" height="100%" fill="url(#tech-grid)" />
-
-        <!-- Glowing Ambient Orbs -->
-        <circle cx="80%" cy="20%" r="400" fill="url(#glowB)" class="orb-float-1" />
-        <circle cx="20%" cy="80%" r="300" fill="url(#glowG)" class="orb-float-2" />
-
-        <!-- Cybernetic Data Lines -->
-        <path
-          class="cyber-path"
-          d="M -100 150 Q 200 50, 500 250 T 1200 150"
-          fill="none"
-          stroke="var(--color-primary)"
-          stroke-width="1"
-          opacity="0.4"
-        />
-        <path
-          class="cyber-path-reverse"
-          d="M 1200 450 Q 800 550, 500 350 T -100 450"
-          fill="none"
-          stroke="var(--color-secondary)"
-          stroke-width="1"
-          opacity="0.2"
-        />
-      </svg>
-    </div>
-
+    <!-- Mesh gradient now handled globally in App.vue -->
     <div class="hero-content">
       <h2 class="greeting">Hello, I'm</h2>
-      <h1 class="name">{{ profile.name }}</h1>
+      <h1 class="name">
+        <span class="text-gradient">{{ profile.name }}</span>
+      </h1>
       <h3 class="role">{{ profile.role }}</h3>
       <p class="tagline">{{ profile.tagline }}</p>
 
@@ -138,59 +91,6 @@ const profile = {
   gap: 2rem;
 }
 
-.hero-bg-vectors {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.tech-grid-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.orb-float-1 {
-  animation: orbDrift 20s infinite alternate ease-in-out;
-}
-
-.orb-float-2 {
-  animation: orbDrift 25s infinite alternate-reverse ease-in-out;
-}
-
-@keyframes orbDrift {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-30px, 50px);
-  }
-  100% {
-    transform: translate(20px, -20px);
-  }
-}
-
-.cyber-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: drawPath 4s infinite linear alternate;
-}
-
-.cyber-path-reverse {
-  stroke-dasharray: 800;
-  stroke-dashoffset: 800;
-  animation: drawPath 5s infinite linear alternate-reverse;
-}
-
-@keyframes drawPath {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
 .hero-content {
   position: relative;
   z-index: 1;
@@ -209,9 +109,9 @@ const profile = {
 .name {
   font-size: 4rem;
   font-weight: 800;
-  color: var(--color-primary);
   margin-bottom: 0.5rem;
   line-height: 1.1;
+  letter-spacing: -1px;
 }
 
 .role {
@@ -255,25 +155,37 @@ const profile = {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-cyan));
-  color: var(--color-background);
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--color-text-main);
+  border: var(--glass-border);
   position: relative;
   z-index: 2;
-  box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  z-index: -1;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0, 240, 255, 0.5);
-  background: linear-gradient(135deg, var(--color-cyan), var(--color-primary));
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--color-text-main);
-  border: 2px solid var(--color-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
   z-index: 2;
@@ -281,12 +193,12 @@ const profile = {
 }
 
 .btn-secondary:hover {
-  background: var(--color-primary);
-  color: var(--color-background);
-  border-color: var(--color-primary);
-  text-decoration: none;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 240, 255, 0.3);
+  background: var(--color-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 210, 255, 0.15);
 }
 
 /* 3D Cube Animation for Vibe */
@@ -299,35 +211,53 @@ const profile = {
   align-items: center;
 }
 
-/* MacOS Code Window Styles */
+/* MacOS Code Window Styles with Glassmorphism */
 .code-window {
   width: 100%;
   max-width: 500px;
-  background: #0d1224; /* Deep code background */
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 15, 20, 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 16px;
+  border: var(--glass-border);
   box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(22, 242, 179, 0.1);
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(138, 43, 226, 0.1);
   overflow: hidden;
   position: relative;
   z-index: 10;
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.5s ease;
+}
+
+.code-window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0)
+  );
+  z-index: 11;
 }
 
 .code-window:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    0 0 30px rgba(211, 60, 130, 0.2);
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(0, 210, 255, 0.2);
 }
 
 .code-header {
-  background: #1a1e2e;
+  background: rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   display: flex;
   align-items: center;
 }

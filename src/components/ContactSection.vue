@@ -90,9 +90,11 @@ const socialLinks = [
   align-items: center;
   gap: 0.8rem;
   background: var(--color-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   padding: 1rem 2rem;
   border-radius: 50px;
-  border: 1px solid var(--border-color);
+  border: var(--glass-border);
   color: var(--color-text-main);
   transition: all var(--transition-speed) ease;
 }

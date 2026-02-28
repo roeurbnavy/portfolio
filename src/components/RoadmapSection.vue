@@ -109,7 +109,9 @@ const roadmapItems = [
 
 .timeline-content {
   background: var(--color-surface);
-  border: 1px solid var(--border-color);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--border-radius);
   padding: 1.5rem;
   transition: all var(--transition-speed) ease;

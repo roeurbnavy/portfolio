@@ -54,11 +54,11 @@ const navLinks = [
 
 .navbar-scrolled {
   padding: 1rem 0;
-  background: rgba(18, 18, 18, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: var(--glass-border);
+  box-shadow: 0 4px 30px var(--shadow-color);
 }
 
 .nav-container {
@@ -79,8 +79,8 @@ const navLinks = [
 }
 
 .text-primary-glow {
-  color: var(--color-primary);
-  text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  color: var(--color-text-main);
+  text-shadow: 0 0 15px var(--color-primary);
 }
 
 .nav-links {

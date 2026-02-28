@@ -81,7 +81,7 @@ onMounted(() => {
 <style scoped>
 .theme-toggle {
   background: transparent;
-  border: 1px solid var(--border-color);
+  border: var(--glass-border);
   color: var(--color-text-main);
   padding: 0.5rem;
   border-radius: 50%;
